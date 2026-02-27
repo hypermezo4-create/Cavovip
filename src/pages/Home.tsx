@@ -55,8 +55,8 @@ export default function Home() {
       list = list.filter(p => p.sizes?.some(s => selectedSizes.includes(s)));
     }
 
-    if (sortBy === "priceAsc") list = [...list].sort((a,b) => a.priceEgp - b.priceEgp);
-    if (sortBy === "priceDesc") list = [...list].sort((a,b) => b.priceEgp - a.priceEgp);
+    if (sortBy === "priceAsc") list = [...list].sort((a,b) => (a.priceEgp ?? 0) - (b.priceEgp ?? 0));
+    if (sortBy === "priceDesc") list = [...list].sort((a,b) => (b.priceEgp ?? 0) - (a.priceEgp ?? 0));
     if (sortBy === "hot") list = [...list].sort((a,b) => (b.badge==="HOT"?1:0) - (a.badge==="HOT"?1:0));
 
     return list;

@@ -1,7 +1,8 @@
 export type Product = {
   id: string;
   name: string;
-  priceEgp: number;
+  priceEgp: number | null;
+  priceLabel?: string; // e.g. "خاص" to hide price
   brand: string;
   category: string;
   sizes: string[];

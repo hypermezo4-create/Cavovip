@@ -16,6 +16,7 @@ export default function Cart() {
   const { settings } = useStore();
 
   const total = cartTotal(items);
+  const hasCustomPrice = items.some(it => !!it.product.priceLabel || it.product.priceEgp == null);
 
   return (
     <div className="min-h-screen">
@@ -47,7 +48,7 @@ export default function Cart() {
                     <div className="text-xs text-white/60 mt-1">{it.product.brand} • {it.product.category}{it.size ? ` • مقاس ${it.size}` : ""}</div>
 
                     <div className="mt-3 flex items-center justify-between">
-                      <div className="font-black">{it.product.priceEgp.toLocaleString("ar-EG")} جنيه</div>
+                      <div className="font-black">{it.product.priceLabel ? it.product.priceLabel : (it.product.priceEgp ?? 0).toLocaleString("ar-EG") + " جنيه"}</div>
 
                       <div className="flex items-center gap-2">
                         <button onClick={() => setQty(it.product.id, it.qty - 1)} className="p-2 rounded-xl bg-white/5 hover:bg-white/10">
@@ -70,7 +71,7 @@ export default function Cart() {
             <div className="mt-6 bg-white/5 border border-white/10 rounded-2xl p-4 flex items-center justify-between">
               <div>
                 <div className="text-sm text-white/60">الإجمالي</div>
-                <div className="text-2xl font-black">{total.toLocaleString("ar-EG")} جنيه</div>
+                <div className="text-2xl font-black">{hasCustomPrice ? "حسب السعر" : total.toLocaleString("ar-EG") + " جنيه"}</div>
               </div>
 
               <div className="flex items-center gap-2">

@@ -19,5 +19,5 @@ export function saveCart(items: CartItem[]) {
 }
 
 export function cartTotal(items: CartItem[]) {
-  return items.reduce((sum, it) => sum + it.product.priceEgp * it.qty, 0);
+  return items.reduce((sum, it) => sum + ((it.product.priceEgp ?? 0) * it.qty), 0);
 }

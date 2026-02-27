@@ -39,7 +39,8 @@ export default function Admin() {
     setEditing({
       id: uid(),
       name: "",
-      priceEgp: 0,
+      priceEgp: null,
+      priceLabel: "خاص",
       brand: "",
       category: "",
       sizes: ["40","41","42","43","44"],
@@ -217,7 +218,7 @@ export default function Admin() {
                     >
                       <div className="font-black line-clamp-1">{p.name}</div>
                       <div className="text-xs text-white/60 mt-1">{p.brand} • {p.category}</div>
-                      <div className="text-sm font-black mt-2">{p.priceEgp.toLocaleString("ar-EG")} جنيه</div>
+                      <div className="text-sm font-black mt-2">{p.priceLabel ? p.priceLabel : (p.priceEgp ?? 0).toLocaleString("ar-EG") + " جنيه"}</div>
                     </button>
                   ))}
                 </div>
@@ -248,11 +249,30 @@ export default function Admin() {
                   </div>
 
                   <div>
-                    <div className="text-xs text-white/60 mb-1">السعر (جنيه)</div>
+                    <div className="flex items-center justify-between mb-1">
+                      <div className="text-xs text-white/60">السعر</div>
+                      <label className="flex items-center gap-2 text-xs text-white/70 select-none">
+                        <input
+                          type="checkbox"
+                          checked={!!editing.priceLabel}
+                          onChange={(e) => {
+                            const checked = e.target.checked;
+                            setEditing({
+                              ...editing,
+                              priceLabel: checked ? "خاص" : undefined,
+                              priceEgp: checked ? null : (editing.priceEgp ?? 0)
+                            });
+                          }}
+                        />
+                        سعر خاص
+                      </label>
+                    </div>
+
                     <input
-                      value={editing.priceEgp}
+                      value={editing.priceLabel ? editing.priceLabel : (editing.priceEgp ?? 0)}
+                      disabled={!!editing.priceLabel}
                       onChange={(e) => setEditing({ ...editing, priceEgp: toNum(e.target.value) })}
-                      className="w-full bg-black/40 border border-white/10 rounded-2xl px-4 py-3 outline-none"
+                      className={`w-full bg-black/40 border border-white/10 rounded-2xl px-4 py-3 outline-none ${editing.priceLabel ? "opacity-60 cursor-not-allowed" : ""}`}
                     />
                   </div>
 

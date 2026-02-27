@@ -20,7 +20,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
       {products.map((p) => (
         <div key={p.id} className="bg-[#0f0f10] rounded-2xl overflow-hidden border border-white/5 hover:border-white/10 transition">
           <div className="relative aspect-square bg-black/30">
-            <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
+            <img src={p.image} alt={p.name} loading="lazy" decoding="async" className="w-full h-full object-cover" />
             {p.badge && (
               <div className={`absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-bold ${badgeClasses(p.badge)}`}>
                 {p.badge}
@@ -33,7 +33,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
             <div className="text-xs text-white/60 mt-1">{p.brand} • {p.category}</div>
 
             <div className="flex items-center justify-between mt-3">
-              <div className="text-base font-black">{p.priceEgp.toLocaleString("ar-EG")} <span className="text-xs font-semibold text-white/60">جنيه</span></div>
+              <div className="text-base font-black">{p.priceLabel ? p.priceLabel : (p.priceEgp ?? 0).toLocaleString("ar-EG")} {p.priceLabel ? <span className="text-xs font-semibold text-white/60">السعر</span> : <span className="text-xs font-semibold text-white/60">جنيه</span>}</div>
               <div className="text-xs text-white/60">{p.colorsCount}+ ألوان</div>
             </div>
 

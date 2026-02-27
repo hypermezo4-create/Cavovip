@@ -7,16 +7,24 @@ export function waLink(number: string, message: string) {
 }
 
 export function productMessage(p: Product) {
-  return `عايز اطلب: ${p.name}\nالسعر: ${p.priceEgp} جنيه`;
+  const price = p.priceLabel ? p.priceLabel : `${p.priceEgp ?? 0} جنيه`;
+  return `عايز اطلب: ${p.name}
+السعر: ${price}`;
 }
 
 export function cartMessage(items: CartItem[]) {
   const lines = items.map(it => {
     const size = it.size ? ` | مقاس: ${it.size}` : "";
-    return `- ${it.product.name} x${it.qty}${size} = ${it.product.priceEgp * it.qty} جنيه`;
+    const priceLine = it.product.priceLabel ? it.product.priceLabel : `${(it.product.priceEgp ?? 0) * it.qty} جنيه`;
+    return `- ${it.product.name} x${it.qty}${size} = ${priceLine}`;
   });
-  const total = items.reduce((s, it) => s + it.product.priceEgp * it.qty, 0);
-  return `طلب Cavo:\n${lines.join("\n")}\n\nالإجمالي: ${total} جنيه`;
+  const hasCustom = items.some(it => !!it.product.priceLabel || it.product.priceEgp == null);
+  const total = items.reduce((s, it) => s + (it.product.priceEgp ?? 0) * it.qty, 0);
+  return `طلب Cavo:
+${lines.join("
+")}
+
+الإجمالي: ${hasCustom ? "حسب السعر" : `${total} جنيه`}`;
 }
 
 export function openProductWhatsApp(settings: StoreSettings, p: Product) {

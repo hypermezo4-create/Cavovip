@@ -1,0 +1,58 @@
+[
+  {
+    "id": "p1",
+    "name": "Adidas Equipment Plus 1",
+    "priceEgp": 1500,
+    "brand": "Adidas",
+    "category": "Running",
+    "sizes": [
+      "40",
+      "41",
+      "42",
+      "43",
+      "44"
+    ],
+    "colorsCount": 4,
+    "image": "/assets/product-1.png",
+    "badge": "HOT",
+    "desc": "خامة ممتازة ومريحة للمشي اليومي."
+  },
+  {
+    "id": "p2",
+    "name": "Nike Air Max Street",
+    "priceEgp": 1650,
+    "brand": "Nike",
+    "category": "Street",
+    "sizes": [
+      "39",
+      "40",
+      "41",
+      "42",
+      "43",
+      "44",
+      "45"
+    ],
+    "colorsCount": 3,
+    "image": "/assets/product-2.png",
+    "badge": "NEW",
+    "desc": "ستايل ستريت مع توسيد مريح."
+  },
+  {
+    "id": "p3",
+    "name": "On Loewe Edition",
+    "priceEgp": 1750,
+    "brand": "On",
+    "category": "Limited",
+    "sizes": [
+      "40",
+      "41",
+      "42",
+      "43",
+      "44"
+    ],
+    "colorsCount": 2,
+    "image": "/assets/product-3.png",
+    "badge": "SALE",
+    "desc": "إصدار محدود بلمسة فخمة."
+  }
+]
